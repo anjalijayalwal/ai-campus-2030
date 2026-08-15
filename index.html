@@ -675,6 +675,108 @@ function showLesson(topic) {
 }
 
 </script>
+<!-- AI QUIZ -->
+<section id="quiz" style="padding:80px 7%; text-align:center;">
+
+  <h2 style="font-size:40px;">🧠 AI Quiz Generator</h2>
+
+  <p style="color:#9ea4bd; margin:15px 0 30px;">
+    Test your knowledge with a quick AI-style quiz.
+  </p>
+
+  <button class="btn" onclick="startQuiz()">
+    Generate Quiz 🚀
+  </button>
+
+  <div id="quizBox" style="margin-top:30px;"></div>
+
+</section>
+
+<script>
+
+function startQuiz() {
+
+  document.getElementById("quizBox").innerHTML = `
+
+    <div class="card">
+
+      <h3>🤖 AI Quiz</h3>
+
+      <p style="margin:20px 0;">
+        What does AI stand for?
+      </p>
+
+      <button class="btn" onclick="checkAnswer(true)">
+        Artificial Intelligence
+      </button>
+
+      <br><br>
+
+      <button
+        class="btn"
+        onclick="checkAnswer(false)"
+        style="background:#333a5c;"
+      >
+        Automated Internet
+      </button>
+
+    </div>
+
+  `;
+}
+
+
+function checkAnswer(correct) {
+
+  if(correct) {
+
+    document.getElementById("quizBox").innerHTML = `
+
+      <div class="card">
+
+        <div class="icon">🎉</div>
+
+        <h3>Correct Answer!</h3>
+
+        <p style="margin-top:15px;">
+          Your answer is correct.
+        </p>
+
+        <h2 style="margin-top:15px;">
+          Score: 1 / 1 🏆
+        </h2>
+
+      </div>
+
+    `;
+
+  } else {
+
+    document.getElementById("quizBox").innerHTML = `
+
+      <div class="card">
+
+        <div class="icon">❌</div>
+
+        <h3>Try Again!</h3>
+
+        <p style="margin-top:15px;">
+          The correct answer is
+          <b>Artificial Intelligence</b>.
+        </p>
+
+        <h2 style="margin-top:15px;">
+          Score: 0 / 1
+        </h2>
+
+      </div>
+
+    `;
+
+  }
+
+}
+
 </script>
 </body>
 </html>
