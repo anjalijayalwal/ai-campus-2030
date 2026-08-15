@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Campus 2030</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:#050713;
+  color:#fff;
+  overflow-x:hidden;
+}
+
+/* BACKGROUND */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    linear-gradient(rgba(80,100,255,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(80,100,255,.05) 1px,transparent 1px);
+  background-size:50px 50px;
+  pointer-events:none;
+  z-index:-2;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  width:500px;
+  height:500px;
+  background:#5b3cff;
+  filter:blur(180px);
+  opacity:.15;
+  top:20%;
+  left:30%;
+  pointer-events:none;
+  z-index:-1;
+}
+
+/* NAVBAR */
+nav{
+  position:fixed;
+  top:18px;
+  left:50%;
+  transform:translateX(-50%);
+  width:90%;
+  max-width:1150px;
+  padding:16px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(12,16,35,.75);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:50px;
+  z-index:1000;
+}
+
+.logo{
+  font-weight:bold;
+  font-size:18px;
+  letter-spacing:1px;
+}
+
+.logo span{
+  color:#8b7cff;
+}
+
+.nav-links{
+  display:flex;
+  gap:25px;
+}
+
+.nav-links a{
+  color:#cbd0e8;
+  text-decoration:none;
+  font-size:14px;
+  transition:.3s;
+}
+
+.nav-links a:hover{
+  color:#9b8cff;
+}
+
+.nav-btn{
+  padding:10px 18px;
+  background:#735cff;
+  border-radius:25px;
+  color:#fff!important;
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:150px 20px 80px;
+  position:relative;
+}
+
+.hero-content{
+  max-width:900px;
+}
+
+.badge{
+  display:inline-block;
+  padding:9px 18px;
+  border:1px solid rgba(139,124,255,.5);
+  background:rgba(115,92,255,.08);
+  border-radius:30px;
+  color:#aaa0ff;
+  font-size:13px;
+  margin-bottom:25px;
+}
+
+.hero h1{
+  font-size:clamp(48px,9vw,100px);
+  line-height:.95;
+  letter-spacing:-4px;
+  margin-bottom:28px;
+}
+
+.gradient{
+  background:linear-gradient(90deg,#fff,#9d8cff,#65d9ff);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  max-width:650px;
+  margin:auto;
+  color:#aeb4ce;
+  font-size:18px;
+  line-height:1.7;
+}
+
+.buttons{
+  margin-top:35px;
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  padding:15px 26px;
+  border-radius:30px;
+  text-decoration:none;
+  color:#fff;
+  font-weight:bold;
+  background:#735cff;
+  box-shadow:0 0 30px rgba(115,92,255,.3);
+  transition:.3s;
+  border:none;
+  cursor:pointer;
+}
+
+.btn:hover{
+  transform:translateY(-4px);
+  box-shadow:0 0 40px rgba(115,92,255,.6);
+}
+
+.btn-outline{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.15);
+}
+
+/* AI ORB */
+.orb{
+  width:180px;
+  height:180px;
+  margin:55px auto 0;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 35% 30%,#fff,#9d8cff 15%,#533cff 45%,#11152e 70%);
+  box-shadow:
+    0 0 40px #735cff,
+    0 0 100px rgba(115,92,255,.5);
+  animation:float 4s ease-in-out infinite;
+  position:relative;
+}
+
+.orb::before,
+.orb::after{
+  content:"";
+  position:absolute;
+  inset:-25px;
+  border:1px solid rgba(130,115,255,.35);
+  border-radius:50%;
+  animation:spin 8s linear infinite;
+}
+
+.orb::after{
+  inset:-45px;
+  animation-duration:12s;
+}
+
+@keyframes float{
+  50%{transform:translateY(-15px);}
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg);}
+}
+
+/* SECTIONS */
+section{
+  padding:100px 7%;
+}
+
+.section-title{
+  text-align:center;
+  max-width:700px;
+  margin:auto;
+}
+
+.section-title span{
+  color:#8d7cff;
+}
+
+.section-title h2{
+  font-size:45px;
+  margin-bottom:15px;
+}
+
+.section-title p{
+  color:#9fa6c0;
+  line-height:1.6;
+}
+
+/* CARDS */
+.grid{
+  max-width:1150px;
+  margin:50px auto 0;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:20px;
+}
+
+.card{
+  padding:30px;
+  min-height:220px;
+  border-radius:24px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.1);
+  backdrop-filter:blur(15px);
+  transition:.35s;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(130,115,255,.7);
+  box-shadow:0 20px 50px rgba(0,0,0,.3);
+}
+
+.card-icon{
+  font-size:40px;
+  margin-bottom:25px;
+}
+
+.card h3{
+  font-size:21px;
+  margin-bottom:12px;
+}
+
+.card p{
+  color:#969db7;
+  line-height:1.6;
+  font-size:14px;
+}
+
+/* FEST */
+.fest{
+  max-width:1100px;
+  margin:auto;
+  padding:55px;
+  border-radius:30px;
+  background:
+    radial-gradient(circle at top right,rgba(110,80,255,.25),transparent 40%),
+    rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.1);
+  text-align:center;
+}
+
+.fest h2{
+  font-size:50px;
+  margin-bottom:15px;
+}
+
+.fest p{
+  color:#a5abc3;
+  margin-bottom:30px;
+}
+
+/* STATS */
+.stats{
+  max-width:1000px;
+  margin:50px auto 0;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.stat{
+  text-align:center;
+  padding:30px;
+  background:rgba(255,255,255,.04);
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.stat h3{
+  font-size:35px;
+  color:#9a8cff;
+}
+
+.stat p{
+  color:#9299b2;
+  margin-top:8px;
+}
+
+/* FOOTER */
+footer{
+  padding:45px 20px;
+  text-align:center;
+  border-top:1px solid rgba(255,255,255,.08);
+  color:#777e98;
+}
+
+footer strong{
+  color:#9b8cff;
+}
+
+/* MOBILE */
+@media(max-width:700px){
+
+  nav{
+    width:94%;
+  }
+
+  .nav-links{
+    display:none;
+  }
+
+  .hero h1{
+    letter-spacing:-2px;
+  }
+
+  .hero p{
+    font-size:16px;
+  }
+
+  .section-title h2{
+    font-size:35px;
+  }
+
+  .fest{
+    padding:35px 20px;
+  }
+
+  .fest h2{
+    font-size:38px;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+
+  <div class="logo">
+    AI <span>CAMPUS</span> 2030
+  </div>
+
+  <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#ai">AI Tools</a>
+    <a href="#campus">Campus</a>
+    <a href="#fest">AI Fest</a>
+    <a href="#ai" class="nav-btn">Ask AI</a>
+  </div>
+
+</nav>
+
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+  <div class="hero-content">
+
+    <div class="badge">
+      🤖 AI FEST 2026 • FUTURE OF EDUCATION
+    </div>
+
+    <h1>
+      The Future of<br>
+      <span class="gradient">Education Starts Here.</span>
+    </h1>
+
+    <p>
+      Welcome to AI Campus 2030 — a futuristic digital campus
+      where Artificial Intelligence helps students learn,
+      explore and build the future.
+    </p>
+
+    <div class="buttons">
+
+      <a href="#ai" class="btn">
+        Explore AI →
+      </a>
+
+      <a href="#campus" class="btn btn-outline">
+        Explore Campus
+      </a>
+
+    </div>
+
+    <div class="orb"></div>
+
+  </div>
+
+</section>
+
+
+<!-- AI TOOLS -->
+<section id="ai">
+
+  <div class="section-title">
+
+    <h2>
+      Intelligence at <span>Your Fingertips</span>
+    </h2>
+
+    <p>
+      Explore smart tools designed to make student life
+      easier, faster and more creative.
+    </p>
+
+  </div>
+
+
+  <div class="grid">
+
+    <div class="card">
+
+      <div class="card-icon">🤖</div>
+
+      <h3>Campus AI</h3>
+
+      <p>
+        Ask questions and interact with your
+        futuristic AI campus assistant.
+      </p>
+
+      <br>
+
+      <button class="btn" onclick="openAI()">
+        Ask AI
+      </button>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-icon">📚</div>
+
+      <h3>Study AI</h3>
+
+      <p>
+        Learn concepts, create notes and
+        prepare smarter for exams.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-icon">🧠</div>
+
+      <h3>AI Quiz</h3>
+
+      <p>
+        Test your knowledge with interactive
+        AI-powered quizzes.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-icon">🎓</div>
+
+      <h3>Career AI</h3>
+
+      <p>
+        Discover possible career paths based
+        on your interests and skills.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SMART CAMPUS -->
+<section id="campus">
+
+  <div class="section-title">
+
+    <h2>
+      Welcome to the <span>Smart Campus</span>
+    </h2>
+
+    <p>
+      A connected campus designed for the next generation
+      of students.
+    </p>
+
+  </div>
+
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-icon">🏫</div>
+      <h3>Smart Classrooms</h3>
+      <p>
+        Interactive learning spaces powered by modern technology.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🔬</div>
+      <h3>AI Innovation Lab</h3>
+      <p>
+        A place where students experiment, create and innovate.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">📖</div>
+      <h3>Digital Library</h3>
+      <p>
+        Access knowledge and learning resources digitally.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🌱</div>
+      <h3>Green Campus</h3>
+      <p>
+        Smart ideas for building a cleaner and greener future.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- AI FEST -->
+<section id="fest">
+
+  <div class="fest">
+
+    <div class="badge">
+      🚀 SPECIAL EVENT
+    </div>
+
+    <h2>AI FEST 2026</h2>
+
+    <p>
+      Imagine. Innovate. Create the Future.
+    </p>
+
+    <a href="#home" class="btn">
+      Explore AI Fest →
+    </a>
+
+  </div>
+
+
+  <div class="stats">
+
+    <div class="stat">
+      <h3>AI</h3>
+      <p>Powered Learning</p>
+    </div>
+
+    <div class="stat">
+      <h3>2030</h3>
+      <p>Vision for Education</p>
+    </div>
+
+    <div class="stat">
+      <h3>∞</h3>
+      <p>Possibilities</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+  <p>
+    © 2026 <strong>AI Campus 2030</strong>
+  </p>
+
+  <p style="margin-top:10px;">
+    Created for AI Fest • Future of Education
+  </p>
+
+</footer>
+
+
+<!-- AI BUTTON -->
+<button
+  class="btn"
+  onclick="openAI()"
+  style="
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:2000;
+  "
+>
+  🤖 Ask AI
+</button>
+
+
+<!-- AI CHAT -->
+<div
+  id="aiChat"
+  style="
+    display:none;
+    position:fixed;
+    right:20px;
+    bottom:80px;
+    width:340px;
+    max-width:calc(100% - 40px);
+    height:450px;
+    background:#0c1024;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:25px;
+    z-index:3000;
+    box-shadow:0 20px 80px rgba(0,0,0,.6);
+    overflow:hidden;
+  "
+>
+
+  <div style="
+    padding:20px;
+    background:#151a38;
+    display:flex;
+    justify-content:space-between;
+  ">
+
+    <b>🤖 Campus AI</b>
+
+    <button
+      onclick="closeAI()"
+      style="
+        background:none;
+        border:none;
+        color:white;
+        font-size:22px;
+      "
+    >
+      ×
+    </button>
+
+  </div>
+
+
+  <div
+    id="messages"
+    style="
+      height:330px;
+      padding:15px;
+      overflow-y:auto;
+    "
+  >
+
+    <div style="
+      background:#191f40;
+      padding:12px;
+      border-radius:15px;
+      margin-bottom:10px;
+    ">
+      👋 Hello! I'm Campus AI.<br><br>
+      Ask me about AI, studies, careers or AI Fest.
+    </div>
+
+  </div>
+
+
+  <div style="
+    display:flex;
+    padding:10px;
+    background:#151a38;
+  ">
+
+    <input
+      id="userInput"
+      placeholder="Ask something..."
+      onkeydown="if(event.key==='Enter') sendMessage()"
+      style="
+        flex:1;
+        padding:12px;
+        border:none;
+        outline:none;
+        border-radius:20px;
+        background:#252b4b;
+        color:white;
+      "
+    >
+
+    <button
+      onclick="sendMessage()"
+      class="btn"
+      style="padding:10px 16px;margin-left:7px;"
+    >
+      ➤
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+function openAI(){
+
+  document.getElementById("aiChat").style.display="block";
+
+}
+
+function closeAI(){
+
+  document.getElementById("aiChat").style.display="none";
+
+}
+
+
+function sendMessage(){
+
+  const input=document.getElementById("userInput");
+
+  const text=input.value.trim();
+
+  if(text==="") return;
+
+  const messages=document.getElementById("messages");
+
+  const user=document.createElement("div");
+
+  user.style.cssText=
+    "background:#735cff;padding:12px;border-radius:15px;margin:10px 0 10px auto;max-width:85%;";
+
+  user.textContent=text;
+
+  messages.appendChild(user);
+
+  input.value="";
+
+
+  setTimeout(()=>{
+
+    const bot=document.createElement("div");
+
+    bot.style.cssText=
+      "background:#191f40;padding:12px;border-radius:15px;margin-bottom:10px;max-width:90%;";
+
+    let answer=
+      "🤖 I'm Campus AI. Try asking about AI, study, career or AI Fest.";
+
+    const q=text.toLowerCase();
+
+
+    if(q.includes("ai")){
+
+      answer=
+      "🤖 AI means Artificial Intelligence — technology that allows computers to perform tasks that normally require human intelligence.";
+
+    }
+
+    else if(q.includes("study")){
+
+      answer=
+      "📚 Study tip: Break a big topic into small parts, learn one concept at a time and test yourself with questions.";
+
+    }
+
+    else if(q.includes("career")){
+
+      answer=
+      "🎓 Technology, AI, data science, cybersecurity, design and research are some areas you can explore.";
+
+    }
+
+    else if(q.includes("fest")){
+
+      answer=
+      "🚀 AI Fest is a place to showcase Artificial Intelligence projects, ideas and innovations.";
+
+    }
+
+    else if(q.includes("hello") || q.includes("hi")){
+
+      answer=
+      "👋 Hello! Welcome to AI Campus 2030. How can I help you?";
+
+    }
+
+
+    bot.textContent=answer;
+
+    messages.appendChild(bot);
+
+    messages.scrollTop=messages.scrollHeight;
+
+  },600);
+
+}
+
+</script>
+
+</body>
+</html>
