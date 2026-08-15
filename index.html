@@ -566,7 +566,115 @@ function sendMessage() {
   }, 700);
 
 }
+<section id="study" style="padding:80px 7%; text-align:center;">
 
+  <h2 style="font-size:40px;">📚 AI Study Hub</h2>
+
+  <p style="color:#9ea4bd; margin:15px 0 30px;">
+    Enter a topic and start learning smarter.
+  </p>
+
+  <input
+    id="studyTopic"
+    type="text"
+    placeholder="Example: Photosynthesis"
+    style="
+      padding:15px;
+      width:80%;
+      max-width:450px;
+      border-radius:30px;
+      border:none;
+      outline:none;
+      background:#171e3d;
+      color:white;
+    "
+  >
+
+  <button
+    onclick="startStudy()"
+    style="
+      padding:15px 25px;
+      margin-left:8px;
+      border:none;
+      border-radius:30px;
+      background:#7657ff;
+      color:white;
+      font-weight:bold;
+    "
+  >
+    Start Learning
+  </button>
+
+  <div id="studyResult" style="margin-top:30px;"></div>
+
+</section>
+
+<script>
+
+function startStudy() {
+
+  let topic = document.getElementById("studyTopic").value;
+
+  if(topic.trim() === "") {
+    alert("Please enter a topic!");
+    return;
+  }
+
+  document.getElementById("studyResult").innerHTML = `
+
+    <div class="card">
+
+      <div class="icon">🧠</div>
+
+      <h3>${topic}</h3>
+
+      <p style="margin-top:15px;">
+        AI Study Assistant is preparing your lesson...
+      </p>
+
+      <br>
+
+      <button
+        onclick="showLesson('${topic}')"
+        class="btn"
+      >
+        📖 Explain Topic
+      </button>
+
+    </div>
+
+  `;
+}
+
+
+function showLesson(topic) {
+
+  document.getElementById("studyResult").innerHTML = `
+
+    <div class="card">
+
+      <div class="icon">🤖</div>
+
+      <h3>${topic}</h3>
+
+      <p style="margin-top:15px;">
+        This is an AI-powered learning demo.
+        The system can explain concepts in simple language,
+        create important questions and generate quizzes.
+      </p>
+
+      <br>
+
+      <button class="btn" onclick="alert('Quiz feature coming next!')">
+        🧠 Generate Quiz
+      </button>
+
+    </div>
+
+  `;
+}
+
+</script>
 </script>
 </body>
 </html>
