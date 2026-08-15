@@ -316,6 +316,257 @@
   <footer>
     © 2026 AI Campus 2030 | Created for AI Fest
   </footer>
+<!-- AI ASSISTANT BUTTON -->
+<button class="ai-button" onclick="openAI()">
+  🤖 Ask AI
+</button>
 
+<!-- AI CHAT BOX -->
+<div class="ai-chat" id="aiChat">
+
+  <div class="ai-header">
+    <div>
+      🤖 <b>Campus AI</b>
+      <small>Online • AI Assistant</small>
+    </div>
+
+    <button onclick="closeAI()">×</button>
+  </div>
+
+  <div class="ai-messages" id="messages">
+    <div class="bot-message">
+      👋 Hi! I'm Campus AI.<br>
+      Ask me about studies, campus, careers or AI Fest!
+    </div>
+  </div>
+
+  <div class="ai-input">
+    <input
+      type="text"
+      id="userInput"
+      placeholder="Ask something..."
+      onkeydown="if(event.key==='Enter') sendMessage()"
+    >
+
+    <button onclick="sendMessage()">➤</button>
+  </div>
+
+</div>
+
+
+<style>
+
+.ai-button {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  border: none;
+  padding: 15px 22px;
+  border-radius: 30px;
+  background: #7657ff;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 2000;
+  box-shadow: 0 0 30px rgba(118,87,255,0.6);
+}
+
+.ai-button:hover {
+  transform: scale(1.05);
+}
+
+.ai-chat {
+  display: none;
+  position: fixed;
+  right: 25px;
+  bottom: 85px;
+  width: 350px;
+  height: 500px;
+  background: #0b1025;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 22px;
+  overflow: hidden;
+  z-index: 1999;
+  box-shadow: 0 0 50px rgba(0,0,0,0.6);
+}
+
+.ai-header {
+  padding: 18px;
+  background: #151b38;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ai-header small {
+  display: block;
+  color: #9299b5;
+  margin-top: 4px;
+}
+
+.ai-header button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.ai-messages {
+  height: 380px;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.bot-message,
+.user-message {
+  padding: 11px 14px;
+  margin-bottom: 12px;
+  border-radius: 15px;
+  max-width: 85%;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.bot-message {
+  background: #171e3d;
+  color: #ddd;
+}
+
+.user-message {
+  background: #7657ff;
+  margin-left: auto;
+}
+
+.ai-input {
+  display: flex;
+  padding: 10px;
+  background: #151b38;
+}
+
+.ai-input input {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  background: #242b4b;
+  color: white;
+}
+
+.ai-input button {
+  margin-left: 8px;
+  width: 45px;
+  border: none;
+  border-radius: 50%;
+  background: #7657ff;
+  color: white;
+  cursor: pointer;
+}
+
+@media(max-width:500px) {
+
+  .ai-chat {
+    right: 10px;
+    bottom: 80px;
+    width: calc(100% - 20px);
+  }
+
+  .ai-button {
+    right: 15px;
+  }
+
+}
+
+</style>
+
+
+<script>
+
+function openAI() {
+  document.getElementById("aiChat").style.display = "block";
+}
+
+function closeAI() {
+  document.getElementById("aiChat").style.display = "none";
+}
+
+
+function sendMessage() {
+
+  const input = document.getElementById("userInput");
+  const message = input.value.trim();
+
+  if (message === "") return;
+
+  const messages = document.getElementById("messages");
+
+  // USER MESSAGE
+  const userMessage = document.createElement("div");
+
+  userMessage.className = "user-message";
+  userMessage.textContent = message;
+
+  messages.appendChild(userMessage);
+
+  input.value = "";
+
+  // AI RESPONSE
+  setTimeout(function() {
+
+    const botMessage = document.createElement("div");
+
+    botMessage.className = "bot-message";
+
+    let answer =
+      "🤖 I'm still learning! Try asking about AI, studies, careers, campus or AI Fest.";
+
+    const question = message.toLowerCase();
+
+    if (question.includes("ai")) {
+      answer =
+        "🤖 Artificial Intelligence is technology that enables computers to learn, reason and perform tasks that normally require human intelligence.";
+    }
+
+    else if (question.includes("study")) {
+      answer =
+        "📚 Study Tip: Break your topic into small sections, learn one concept at a time and test yourself with questions.";
+    }
+
+    else if (question.includes("career")) {
+      answer =
+        "🎓 Career Tip: Explore your interests and skills first. AI, data science, cybersecurity and software development are examples of technology careers.";
+    }
+
+    else if (question.includes("fest")) {
+      answer =
+        "🎉 AI Fest is where students can explore Artificial Intelligence through projects, demonstrations and competitions.";
+    }
+
+    else if (question.includes("campus")) {
+      answer =
+        "🏫 Welcome to AI Campus 2030! Explore our Smart Campus, AI Study Hub, Career AI and Green Campus.";
+    }
+
+    else if (
+      question.includes("hello") ||
+      question.includes("hi")
+    ) {
+      answer =
+        "👋 Hello! I'm Campus AI. How can I help you today?";
+    }
+
+    botMessage.textContent = answer;
+
+    messages.appendChild(botMessage);
+
+    messages.scrollTop = messages.scrollHeight;
+
+  }, 700);
+
+}
+
+</script>
 </body>
 </html>
