@@ -777,6 +777,130 @@ function checkAnswer(correct) {
 
 }
 
+<!-- CAREER AI -->
+<section id="career" style="padding:80px 7%; text-align:center;">
+
+  <h2 style="font-size:40px;">🎓 Career AI</h2>
+
+  <p style="color:#9ea4bd; margin:15px 0 30px;">
+    Choose your interest and discover possible career paths.
+  </p>
+
+  <select id="careerInterest"
+    style="
+      padding:15px 20px;
+      width:80%;
+      max-width:400px;
+      border-radius:30px;
+      border:none;
+      outline:none;
+      background:#171e3d;
+      color:white;
+      font-size:16px;
+    ">
+
+    <option value="">Choose your interest</option>
+    <option value="technology">💻 Technology</option>
+    <option value="science">🔬 Science</option>
+    <option value="design">🎨 Design</option>
+    <option value="business">💼 Business</option>
+
+  </select>
+
+  <br><br>
+
+  <button class="btn" onclick="findCareer()">
+    Find My Career 🚀
+  </button>
+
+  <div id="careerResult" style="margin-top:30px;"></div>
+
+</section>
+
+<script>
+
+function findCareer() {
+
+  const interest =
+    document.getElementById("careerInterest").value;
+
+  let result = "";
+
+  if (interest === "") {
+
+    alert("Please choose your interest!");
+
+    return;
+  }
+
+  if (interest === "technology") {
+
+    result = `
+      <div class="card">
+        <div class="icon">💻</div>
+        <h3>Technology Careers</h3>
+        <p>
+          Software Developer, AI Engineer,
+          Data Scientist, Cybersecurity Specialist
+          and Web Developer could be interesting paths.
+        </p>
+      </div>
+    `;
+
+  }
+
+  else if (interest === "science") {
+
+    result = `
+      <div class="card">
+        <div class="icon">🔬</div>
+        <h3>Science Careers</h3>
+        <p>
+          Research Scientist, Biotechnologist,
+          Environmental Scientist and Laboratory
+          careers could be possible options.
+        </p>
+      </div>
+    `;
+
+  }
+
+  else if (interest === "design") {
+
+    result = `
+      <div class="card">
+        <div class="icon">🎨</div>
+        <h3>Creative Careers</h3>
+        <p>
+          UI/UX Designer, Graphic Designer,
+          Fashion Designer, Animator and
+          Digital Artist could be suitable paths.
+        </p>
+      </div>
+    `;
+
+  }
+
+  else if (interest === "business") {
+
+    result = `
+      <div class="card">
+        <div class="icon">💼</div>
+        <h3>Business Careers</h3>
+        <p>
+          Entrepreneur, Marketing Specialist,
+          Business Analyst and Management careers
+          could be interesting options.
+        </p>
+      </div>
+    `;
+
+  }
+
+  document.getElementById("careerResult").innerHTML = result;
+
+}
+
 </script>
 </body>
 </html>
