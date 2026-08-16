@@ -760,6 +760,38 @@ footer strong{
 
 
 <script>
+function campusInfo(place) {
+
+  let title = "";
+  let text = "";
+
+  if (place === "classroom") {
+    title = "🏫 Smart Classroom";
+    text = "AI can help teachers create personalized lessons, smart quizzes and interactive learning experiences.";
+  }
+
+  else if (place === "lab") {
+    title = "🔬 AI Innovation Lab";
+    text = "Students can experiment with Artificial Intelligence, robotics, coding and future technologies.";
+  }
+
+  else if (place === "library") {
+    title = "📖 Digital Library";
+    text = "Students can discover digital books, learning resources, summaries and AI-powered study material.";
+  }
+
+  else if (place === "green") {
+    title = "🌱 Green Campus";
+    text = "AI can help monitor energy, water and waste to create a smarter and more sustainable campus.";
+  }
+
+  document.getElementById("campusResult").innerHTML = `
+    <div class="card">
+      <div class="card-icon">${title.substring(0,2)}</div>
+      <h3>${title}</h3>
+      <p>${text}</p>
+    </div>
+  `;
 
 function openAI(){
 
